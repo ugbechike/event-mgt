@@ -3066,6 +3066,7 @@ __metadata:
     react-native-screens: ^3.34.0
     react-native-vector-icons: ^10.1.0
     react-test-renderer: 18.3.1
+    rtn-biometric: ./RTNBiometrics
     typescript: 5.0.4
   languageName: unknown
   linkType: soft
@@ -8501,6 +8502,16 @@ __metadata:
   bin:
     rimraf: ./bin.js
   checksum: 3ea587b981a19016297edb96d1ffe48af7e6af69660e3b371dbfc73722a73a0b0e9be5c88089fbeeb866c389c1098e07f64929c7414290504b855f54f901ab10
+  languageName: node
+  linkType: hard
+
+"rtn-biometric@file:./RTNBiometrics::locator=EventMgt%40workspace%3A.":
+  version: 0.0.1
+  resolution: "rtn-biometric@file:./RTNBiometrics#./RTNBiometrics::hash=4dedf3&locator=EventMgt%40workspace%3A."
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: e6331c064206d0da4d63233376cad4cc49e88ab1a464c96a286e7ba4b9cf606ab4a59d124826c3df2dfed7627b9b3ea4d68223ea23e03f39fa81f5f8be5dc91e
   languageName: node
   linkType: hard
 
