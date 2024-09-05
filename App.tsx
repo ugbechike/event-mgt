@@ -29,13 +29,3 @@ function App(): React.JSX.Element {
 }
 
 export default App;
-
-
-// cd MyApp
-// yarn add ./RTNBiometrics
-// cd ..
-// node EventMgt/node_modules/react-native/scripts/generate-codegen-artifacts.js \
-//   --path EventMgt/ \
-//   --outputPath EventMgt/RTNBiometrics/generated/
-
-// ref: https://github.com/reactwg/react-native-new-architecture/blob/main/docs/turbo-modules.md

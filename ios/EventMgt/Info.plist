@@ -48,8 +48,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSFaceIDUsageDescription</key>
-	<string>EventMgt would require access to face id</string>
 	<key>UIAppFonts</key>
 <array>
   <string>AntDesign.ttf</string>
