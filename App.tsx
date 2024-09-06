@@ -13,6 +13,7 @@ import React from 'react';
 // } from 'react-native/Libraries/NewAppScreen';
 import {NavigationWrapper} from './src/navigation';
 import {TabNavigator} from './src/navigation/tab-navigator';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -22,9 +23,11 @@ function App(): React.JSX.Element {
   // };
 
   return (
-    <NavigationWrapper>
-      <TabNavigator />
-    </NavigationWrapper>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationWrapper>
+        <TabNavigator />
+      </NavigationWrapper>
+    </GestureHandlerRootView>
   );
 }
 
