@@ -1,38 +1,95 @@
-// Task:
-// Create a simple React Native component named ToggleVisibility that contains a button and a text element. The text element should initially be hidden. When the user presses the button, the text should toggle between being visible and hidden.
-// Requirements:
-// Initial State: The text is hidden.
-// Button Press: When the button is pressed, the text's visibility toggles.
-// Text Content: The text can be a simple static string, e.g., "Hello, world!".
-// Use Functional Component: Implement this as a functional component using React Native.
+import React, {useMemo, useState} from 'react';
+import {SafeAreaView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {theme} from '../theme';
+import {Divider, Text, TicketCard} from '../components';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import {FlashList} from '@shopify/flash-list';
+import {tickets} from '../mocks';
 
-import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+const eventTabs = [
+  {label: 'upcoming', title: 'Upcoming'},
+  {label: 'past', title: 'Past Events'},
+];
 
 export const TicketScreen = () => {
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+  const filteredTickets = useMemo(() => {
+    return tickets.filter(
+      ticket => ticket.status === eventTabs[selectedTabIndex].label,
+    );
+  }, [selectedTabIndex]);
+
   return (
-    <SafeAreaView style={styles.container}>
-      <ToggleVisibility />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <SafeAreaView>
+        <HeaderComponent />
+        <Divider size={10} />
+        <Tabs
+          handleSelectedTab={setSelectedTabIndex}
+          selectedTabIndex={selectedTabIndex}
+        />
+        <Divider />
+        <View style={styles.scrollContainer}>
+          <FlashList
+            data={filteredTickets}
+            renderItem={({item}) => <TicketCard {...item} full={true} />}
+            keyExtractor={item => item.id}
+            estimatedItemSize={100}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={() => <Divider size={4} />}
+          />
+        </View>
+      </SafeAreaView>
+    </View>
   );
 };
 
-const ToggleVisibility = () => {
-  const [visibility, setVisibility] = useState<boolean>(false);
+const HeaderComponent = () => {
   return (
-    <View style={styles.toggleVisibilityContainer}>
-      {visibility && <Text style={styles.visibleText}>Hello world!!</Text>}
-      <TouchableOpacity
-        onPress={() => setVisibility(!visibility)}
-        style={styles.button}>
-        <Text>ToggleVisibility</Text>
-      </TouchableOpacity>
+    <View>
+      <View style={styles.headerWrapper}>
+        <View style={styles.textWrapper}>
+          <Text textStyle="subTitle">Your</Text>
+          <Text textStyle="title">Tickets's</Text>
+        </View>
+        <TouchableOpacity>
+          <IonIcon
+            name="notifications-outline"
+            size={24}
+            color={theme.colors.white}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+interface TabProps {
+  selectedTabIndex: number;
+  handleSelectedTab: (index: number) => void;
+}
+export const Tabs = ({selectedTabIndex, handleSelectedTab}: TabProps) => {
+  return (
+    <View style={styles.tabs}>
+      {eventTabs.map((tab, index) => {
+        const isActive = index === selectedTabIndex;
+        return (
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.tab,
+              isActive && {borderBottomColor: theme.colors.white},
+            ]}
+            onPress={() => handleSelectedTab(index)}>
+            <Text
+              textStyle="title"
+              style={isActive ? styles.activeTab : styles.inactiveTab}>
+              {tab.title}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };
@@ -40,18 +97,39 @@ const ToggleVisibility = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.background,
+    paddingHorizontal: 24,
+  },
+  scrollContainer: {
+    marginBottom: 30,
+    height: '80%',
+  },
+  textWrapper: {},
+  headerWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  tabs: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  toggleVisibilityContainer: {},
-  button: {
+  tab: {
     padding: 10,
-    backgroundColor: 'green',
-    borderRadius: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.darkGrey,
+    width: '50%',
   },
-  visibleText: {
-    fontSize: 20,
-    color: 'black',
-    fontWeight: 'bold',
+  activeTab: {
+    color: theme.colors.white,
+    textAlign: 'center',
+  },
+  inactiveTab: {
+    color: theme.colors.grey,
+    textAlign: 'center',
+  },
+  ticketsSection: {
+    marginTop: 24,
   },
 });

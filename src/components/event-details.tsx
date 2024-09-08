@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {EventData} from '../mocks/events-data';
 import {Text} from './text';
@@ -7,51 +7,47 @@ import {theme} from '../theme';
 
 interface EventDetailsProps {
   detail: EventData;
-  //   detail: DetailsType;
+  handleGetTicket: (detail: EventData) => void;
 }
 
-export const EventDetails = ({detail}: EventDetailsProps) => {
+export const EventDetails = ({detail, handleGetTicket}: EventDetailsProps) => {
   return (
     <View style={styles.container}>
-      <View style={styles.section}>
-        <Text textStyle="label">Title</Text>
-        <Text textStyle="title">{detail.title}</Text>
-      </View>
-      <View style={styles.section}>
-        <Text textStyle="label">Location</Text>
-        <Text textStyle="title">{detail.location}</Text>
-      </View>
-      <View style={styles.section}>
-        <Text textStyle="label">Time</Text>
-        <View style={styles.timeDate}>
-          <Ionicon
-            name="calendar"
-            size={14}
-            color={theme.colors.grey}
-            style={styles.icon}
-          />
-          <Text textStyle="title">{detail.dateTime}</Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.section}>
+          <Text textStyle="label">Title</Text>
+          <Text textStyle="title">{detail.title}</Text>
         </View>
-      </View>
-      <View style={styles.section}>
-        <Text textStyle="label">Price</Text>
-        <Text textStyle="title">{detail.price}</Text>
-      </View>
+        <View style={styles.section}>
+          <Text textStyle="label">Location</Text>
+          <Text textStyle="title">{detail.location}</Text>
+        </View>
+        <View style={styles.section}>
+          <Text textStyle="label">Time</Text>
+          <View style={styles.timeDate}>
+            <Ionicon
+              name="calendar"
+              size={14}
+              color={theme.colors.grey}
+              style={styles.icon}
+            />
+            <Text textStyle="title">{detail.dateTime}</Text>
+          </View>
+        </View>
+        <View style={styles.section}>
+          <Text textStyle="label">Price</Text>
+          <Text textStyle="title">{detail.price}</Text>
+        </View>
 
-      <View style={styles.section}>
-        <Text textStyle="label">Price</Text>
-        <Text textStyle="title">{detail.about}</Text>
-      </View>
+        <View style={styles.section}>
+          <Text textStyle="label">Price</Text>
+          <Text textStyle="title">{detail.about}</Text>
+        </View>
+      </ScrollView>
 
       <TouchableOpacity
-        style={{
-          borderWidth: 1,
-          padding: 10,
-          alignItems: 'center',
-          borderRadius: 5,
-          justifyContent: 'center',
-          backgroundColor: theme.colors.lightGreen,
-        }}>
+        style={styles.button}
+        onPress={() => handleGetTicket(detail)}>
         <Text textStyle="title">Book Event</Text>
       </TouchableOpacity>
     </View>
@@ -66,12 +62,14 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
   },
-  //   footer: {
-  //     display: 'flex',
-  //     flexDirection: 'row',
-  //     justifyContent: 'space-between',
-  //     alignItems: 'center',
-  //   },
+  button: {
+    borderWidth: 1,
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 5,
+    justifyContent: 'center',
+    backgroundColor: theme.colors.lightGreen,
+  },
   timeDate: {
     display: 'flex',
     flexDirection: 'row',
