@@ -11,12 +11,24 @@ interface TicketCardProps {
   time: string;
   locationAddress: string;
   ticketType: string;
+  full?: boolean;
+  quantity: number;
 }
 export const TicketCard = (props: TicketCardProps) => {
-  const {title, image, location, time, locationAddress, ticketType} = props;
+  const {
+    title,
+    image,
+    location,
+    time,
+    locationAddress,
+    ticketType,
+    full = false,
+    quantity,
+  } = props;
+
   return (
     <TouchableWithoutFeedback onPress={() => console.log('xxxxxxx', title)}>
-      <View style={styles.card}>
+      <View style={[styles.card, full && styles.fullCard]}>
         <View style={styles.cardInfo}>
           <Image src={image} style={styles.image} />
           <View style={styles.infoText}>
@@ -39,7 +51,7 @@ export const TicketCard = (props: TicketCardProps) => {
             <Text textStyle="footer">{locationAddress}</Text>
           </View>
           <View style={styles.badge}>
-            <Text textStyle="footer">{ticketType}</Text>
+            <Text textStyle="footer">{ticketType} x{quantity}</Text>
           </View>
         </View>
         <View style={styles.leftCircle} />
@@ -56,7 +68,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     position: 'relative',
     // marginRight: 16,
+    // width: '100%',
     width: 310,
+  },
+  fullCard: {
+    width: '100%',
   },
   cardInfo: {
     display: 'flex',

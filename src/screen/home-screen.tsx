@@ -30,7 +30,6 @@ export const HomeScreen = () => {
           <View style={styles.ticketsSection}>
             <Text textStyle="title">Welcome to event planner</Text>
             <Divider />
-            {/* <TicketCard /> */}
             <FlashList
               data={tickets}
               renderItem={({item}) => <TicketCard {...item} />}

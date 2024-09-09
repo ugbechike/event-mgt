@@ -13,6 +13,7 @@ import React from 'react';
 // } from 'react-native/Libraries/NewAppScreen';
 import {NavigationWrapper} from './src/navigation';
 import {TabNavigator} from './src/navigation/tab-navigator';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -22,20 +23,12 @@ function App(): React.JSX.Element {
   // };
 
   return (
-    <NavigationWrapper>
-      <TabNavigator />
-    </NavigationWrapper>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationWrapper>
+        <TabNavigator />
+      </NavigationWrapper>
+    </GestureHandlerRootView>
   );
 }
 
 export default App;
-
-
-// cd MyApp
-// yarn add ./RTNBiometrics
-// cd ..
-// node EventMgt/node_modules/react-native/scripts/generate-codegen-artifacts.js \
-//   --path EventMgt/ \
-//   --outputPath EventMgt/RTNBiometrics/generated/
-
-// ref: https://github.com/reactwg/react-native-new-architecture/blob/main/docs/turbo-modules.md

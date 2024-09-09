@@ -6,6 +6,7 @@ export const theme = {
         white: '#fff',
         background: '#1A1A1A',
         lightGreen: '#1A968A',
+        darkGrey: '#5E5E5E',
     },
     fontSizes: {
         small: '1em',
@@ -21,10 +22,16 @@ export const theme = {
             bold: 700,
         },
         styles: {
+            large: {
+                color: '#fff',
+                fontSize: 20,
+                fontWeight: 'bold',
+            },
             title: {
                 color: '#fff',
                 fontSize: 16,
                 fontWeight: '600',
+                lineHeight: 24,
             },
             label: {
                 color: '#f5f5f5',

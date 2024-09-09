@@ -1,52 +1,95 @@
-import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {theme} from '../theme';
-import RTNBiometrics from 'rtn-biometric/js/NativeBiometrics';
-import {Text} from '../components';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {eventsData as data, EventData} from '../mocks/events-data';
+import {
+  BottomSheetCard,
+  Card,
+  Divider,
+  EventDetails,
+  Text,
+} from '../components';
+import {useSharedValue} from 'react-native-reanimated';
+import BottomSheet from '@gorhom/bottom-sheet';
+import {TicketsSelectScreen} from './tickets-select-screen';
 
 export const ExploreScreen = () => {
-  const [biometrics, setBiometrics] = useState<string>();
-  return (
-    <View style={styles.container}>
-      <Text>ExploreScreen</Text>
-      <TouchableOpacity
-        onPress={async () => {
-          try {
-            const data = await RTNBiometrics?.getAvailableBiometrics();
-            console.log('===========Get ava==============');
-            console.log(data);
-            console.log('====================================');
-            setBiometrics(data ?? '');
-          } catch (error) {
-            console.log(error);
-          }
-        }}>
-        <Text textStyle="title">get biometric</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={async () => {
-          try {
-            const isAuth = await RTNBiometrics?.authenticate();
-            console.log('===========Auth==========');
-            console.log(isAuth);
-            console.log('====================================');
-          } catch (error) {
-            console.log(error);
-          }
-        }}>
-        <Text textStyle="title">Authenticate</Text>
-      </TouchableOpacity>
+  const [newData, setNewData] = useState([...data, ...data]);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [selectedData, setSelectedData] = useState<EventData>();
+  const animatedValue = useSharedValue(0);
+  const sheetRef = useRef<BottomSheet>(null);
 
-      <Text textStyle="title">Biometrics available are: {biometrics}</Text>
-    </View>
+  const handleGetTicket = (d: EventData) => {
+    sheetRef.current?.expand();
+    console.log('Get ticket for event with id: ', d);
+    // TODO: CALL GET TICKET API WITH ID
+    setSelectedData(d);
+  };
+
+  const MAX = 3;
+  return (
+    <>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.cardContainer}>
+          {newData.map((item, index) => {
+            if (index > currentIndex + MAX || index < currentIndex) {
+              return null;
+            }
+            return (
+              <Card
+                key={index + item.id}
+                item={item}
+                index={index}
+                dataLength={newData.length}
+                maxVisibleItem={MAX}
+                currentIndex={currentIndex}
+                animatedValue={animatedValue}
+                setCurrentIndex={setCurrentIndex}
+                setNewData={setNewData}
+                newData={newData}
+              />
+            );
+          })}
+        </View>
+        <Divider />
+        <Text textStyle="title" style={styles.text}>
+          Event details
+        </Text>
+        <Divider />
+        <View style={styles.detailsContainer}>
+          <EventDetails
+            detail={newData[currentIndex]}
+            handleGetTicket={handleGetTicket}
+          />
+        </View>
+        <BottomSheetCard ref={sheetRef}>
+          <TicketsSelectScreen {...selectedData!} />
+        </BottomSheetCard>
+      </SafeAreaView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+  cardContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.colors.background,
+  },
+  text: {
+    paddingHorizontal: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  detailsContainer: {
+    flex: 3 / 2,
+    justifyContent: 'center',
+    // alignItems: 'center',
   },
 });
