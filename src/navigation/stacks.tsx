@@ -13,7 +13,7 @@ const ProfileStack = createNativeStackNavigator();
 export const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator screenOptions={{headerShown: false}}>
-      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
     </HomeStack.Navigator>
   );
 };
@@ -21,7 +21,7 @@ export const HomeStackScreen = () => {
 export const ExploreStackScreen = () => {
   return (
     <ExploreStack.Navigator screenOptions={{headerShown: false}}>
-      <ExploreStack.Screen name="Explore" component={ExploreScreen} />
+      <ExploreStack.Screen name="ExploreScreen" component={ExploreScreen} />
     </ExploreStack.Navigator>
   );
 };
@@ -29,7 +29,7 @@ export const ExploreStackScreen = () => {
 export const TicketStackScreen = () => {
   return (
     <TicketStack.Navigator screenOptions={{headerShown: false}}>
-      <TicketStack.Screen name="Tickets" component={TicketScreen} />
+      <TicketStack.Screen name="TicketsScreen" component={TicketScreen} />
     </TicketStack.Navigator>
   );
 };
@@ -37,7 +37,7 @@ export const TicketStackScreen = () => {
 export const ProfileStackScreen = () => {
   return (
     <ProfileStack.Navigator screenOptions={{headerShown: false}}>
-      <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+      <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
     </ProfileStack.Navigator>
   );
 };

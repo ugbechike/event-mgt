@@ -1,5 +1,10 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {theme} from '../theme';
 import {
   Avatar,
@@ -13,7 +18,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlashList} from '@shopify/flash-list';
 import {eventsData, tickets} from '../mocks';
 
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -44,7 +49,9 @@ export const HomeScreen = () => {
           <View style={styles.exploreSections}>
             <View style={styles.sectionHeader}>
               <Text textStyle="title">Explore events</Text>
-              <Text textStyle="info">View all</Text>
+              <TouchableOpacity onPress={() => navigation.navigate('Explore')}>
+                <Text textStyle="info">View all</Text>
+              </TouchableOpacity>
             </View>
             <Divider />
             <FlashList

@@ -22,13 +22,13 @@ const tabBarIcon = ({
 }) => {
   let iconName: string = '';
 
-  if (route.name === 'HomeStack') {
+  if (route.name === 'Home') {
     iconName = 'home-outline';
-  } else if (route.name === 'ExploreStack') {
+  } else if (route.name === 'Explore') {
     iconName = 'search-outline';
-  } else if (route.name === 'TicketStack') {
+  } else if (route.name === 'Ticket') {
     iconName = 'ticket-outline';
-  } else if (route.name === 'ProfileStack') {
+  } else if (route.name === 'Profile') {
     iconName = 'person-outline';
   }
 
@@ -44,11 +44,12 @@ export const TabNavigator = () => {
         tabBarStyle: {
           backgroundColor: theme.colors.secondary,
         },
+        tabBarActiveTintColor: theme.colors.lightGreen,
       })}>
-      <Tab.Screen name="HomeStack" component={HomeStackScreen} />
-      <Tab.Screen name="ExploreStack" component={ExploreStackScreen} />
-      <Tab.Screen name="TicketStack" component={TicketStackScreen} />
-      <Tab.Screen name="ProfileStack" component={ProfileStackScreen} />
+      <Tab.Screen name="Home" component={HomeStackScreen} />
+      <Tab.Screen name="Explore" component={ExploreStackScreen} />
+      <Tab.Screen name="Ticket" component={TicketStackScreen} />
+      <Tab.Screen name="Profile" component={ProfileStackScreen} />
     </Tab.Navigator>
   );
 };
