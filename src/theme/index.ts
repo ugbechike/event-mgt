@@ -7,6 +7,7 @@ export const theme = {
         background: '#1A1A1A',
         lightGreen: '#1A968A',
         darkGrey: '#5E5E5E',
+        red: '#FF0000',
     },
     fontSizes: {
         small: '1em',
