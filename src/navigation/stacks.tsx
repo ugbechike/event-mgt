@@ -4,11 +4,21 @@ import {HomeScreen} from '../screen/home-screen';
 import {ExploreScreen} from '../screen/explore-screen';
 import {TicketScreen} from '../screen/ticket-screen';
 import {ProfileScreen} from '../screen/profile-screen';
+import {TicketDetailsScreen} from '../screen/ticket-details-screen';
+import {
+  ExploreStackNavigatorPramList,
+  HomeStackNavigatorPramList,
+  ProfileStackNavigatorPramList,
+  TicketStackNavigatorPramList,
+} from './type';
+import {theme} from '../theme';
 
-const HomeStack = createNativeStackNavigator();
-const ExploreStack = createNativeStackNavigator();
-const TicketStack = createNativeStackNavigator();
-const ProfileStack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator<HomeStackNavigatorPramList>();
+const ExploreStack =
+  createNativeStackNavigator<ExploreStackNavigatorPramList>();
+const TicketStack = createNativeStackNavigator<TicketStackNavigatorPramList>();
+const ProfileStack =
+  createNativeStackNavigator<ProfileStackNavigatorPramList>();
 
 export const HomeStackScreen = () => {
   return (
@@ -28,8 +38,24 @@ export const ExploreStackScreen = () => {
 
 export const TicketStackScreen = () => {
   return (
-    <TicketStack.Navigator screenOptions={{headerShown: false}}>
-      <TicketStack.Screen name="TicketsScreen" component={TicketScreen} />
+    <TicketStack.Navigator>
+      <TicketStack.Screen
+        name="TicketsScreen"
+        component={TicketScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <TicketStack.Screen
+        name="TicketDetailsScreen"
+        component={TicketDetailsScreen}
+        options={{
+          title: 'Ticket Details',
+          headerStyle: {backgroundColor: theme.colors.background},
+          headerTintColor: theme.colors.white,
+          headerBackVisible: true,
+        }}
+      />
     </TicketStack.Navigator>
   );
 };

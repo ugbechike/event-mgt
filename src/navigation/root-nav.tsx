@@ -4,8 +4,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AuthStackScreen} from './auth-stack';
 import {TabNavigator} from './tab-navigator';
 import {UserAuth} from '../features/hooks/use-auth';
+import {RootStackParamList} from './type';
 
-const RootStack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNav = () => {
   const {isSignedIn} = UserAuth();
