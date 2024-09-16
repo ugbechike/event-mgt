@@ -25,6 +25,7 @@
     "react": "18.3.1",
     "react-hook-form": "^7.53.0",
     "react-native": "0.75.2",
+    "react-native-barcoder": "^0.2.4",
     "react-native-gesture-handler": "^2.19.0",
     "react-native-qrcode-svg": "^6.3.2",
     "react-native-reanimated": "^3.15.1",

@@ -19,6 +19,7 @@ export type HomeStackNavigatorPramList = {
 
 export type ExploreStackNavigatorPramList = {
     ExploreScreen: undefined;
+    CheckoutScreen: undefined;
 };
 
 export type TicketStackNavigatorPramList = {

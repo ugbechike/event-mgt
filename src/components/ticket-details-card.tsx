@@ -5,9 +5,16 @@ import {theme} from '../theme';
 import {Divider} from './divider';
 import QRCode from 'react-native-qrcode-svg';
 
-type Props = {};
+type TicketDetailsCardProps = {
+    title: string;
+    date: string;
+    time: string;
+    ticketSet: string;
+    venue: string;
+};
 
-export const TicketDetailsCard = (props: Props) => {
+export const TicketDetailsCard = (props: TicketDetailsCardProps) => {
+    const {title, date, time, ticketSet, venue} = props;
   return (
     <View style={styles.container}>
       <Image
@@ -55,10 +62,13 @@ export const TicketDetailsCard = (props: Props) => {
       <View style={styles.qrCodeWrapper}>
         <QRCode
           value="https://www.jamstackconf.com/"
-          size={120}
+          size={150}
           color={theme.colors.primary}
+          backgroundColor={theme.colors.white}
         />
       </View>
+      <View style={styles.leftCircle} />
+      <View style={styles.rightCircle} />
     </View>
   );
 };
@@ -69,6 +79,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 16,
     borderWidth: 1,
+    position: 'relative',
   },
   image: {
     width: '100%',
@@ -105,13 +116,31 @@ const styles = StyleSheet.create({
     height: 1,
     overflow: 'hidden',
     marginTop: 16,
-    marginBottom: 24,
+    marginBottom: 16,
     marginHorizontal: 8,
   },
   qrCodeWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    padding: 10,
+    paddingVertical: 10,
+  },
+  leftCircle: {
+    position: 'absolute',
+    bottom: 184,
+    left: -10,
+    width: 25,
+    height: 25,
+    borderRadius: 25,
+    backgroundColor: theme.colors.primary,
+  },
+  rightCircle: {
+    position: 'absolute',
+    bottom: 184,
+    right: -10,
+    width: 25,
+    height: 25,
+    borderRadius: 25,
+    backgroundColor: theme.colors.primary,
   },
 });

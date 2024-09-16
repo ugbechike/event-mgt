@@ -12,6 +12,7 @@ import {
   TicketStackNavigatorPramList,
 } from './type';
 import {theme} from '../theme';
+import {CheckoutScreen} from '../screen/checkout-screen';
 
 const HomeStack = createNativeStackNavigator<HomeStackNavigatorPramList>();
 const ExploreStack =
@@ -30,8 +31,24 @@ export const HomeStackScreen = () => {
 
 export const ExploreStackScreen = () => {
   return (
-    <ExploreStack.Navigator screenOptions={{headerShown: false}}>
-      <ExploreStack.Screen name="ExploreScreen" component={ExploreScreen} />
+    <ExploreStack.Navigator>
+      <ExploreStack.Screen
+        name="ExploreScreen"
+        component={ExploreScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <ExploreStack.Screen
+        name="CheckoutScreen"
+        component={CheckoutScreen}
+        options={{
+          title: 'Checkout',
+          headerStyle: {backgroundColor: theme.colors.background},
+          headerTintColor: theme.colors.white,
+          headerBackVisible: true,
+        }}
+      />
     </ExploreStack.Navigator>
   );
 };
