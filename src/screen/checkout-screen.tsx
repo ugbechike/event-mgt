@@ -1,13 +1,11 @@
 import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
-import React, {useCallback} from 'react';
+import React from 'react';
 import {Divider, Text} from '../components';
 import {theme} from '../theme';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
 export const CheckoutScreen = () => {
-  const handlePayment = useCallback(() => {
-    // Integrate stripe payment gateway
-  }, []);
+
   return (
     <>
       <View style={styles.container}>
@@ -86,7 +84,7 @@ export const CheckoutScreen = () => {
           <Text textStyle="title">Pay</Text>
           <Text textStyle="title">$60.00</Text>
         </View>
-        <TouchableOpacity style={styles.button} onPress={handlePayment}>
+        <TouchableOpacity style={styles.button} onPress={() => {}}>
           <Text textStyle="title">Make Payment</Text>
         </TouchableOpacity>
       </View>

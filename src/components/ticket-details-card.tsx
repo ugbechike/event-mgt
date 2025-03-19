@@ -4,17 +4,12 @@ import {Text} from './text';
 import {theme} from '../theme';
 import {Divider} from './divider';
 import QRCode from 'react-native-qrcode-svg';
+import { Ticket } from '../hooks/query/useGetTicket';
 
-type TicketDetailsCardProps = {
-    title: string;
-    date: string;
-    time: string;
-    ticketSet: string;
-    venue: string;
-};
+interface TicketDetailsCardProps extends Ticket {};
 
 export const TicketDetailsCard = (props: TicketDetailsCardProps) => {
-    const {title, date, time, ticketSet, venue} = props;
+    const {title, time, ticketType, location} = props;
   return (
     <View style={styles.container}>
       <Image
@@ -26,33 +21,27 @@ export const TicketDetailsCard = (props: TicketDetailsCardProps) => {
       <Divider size={4} />
       <View style={styles.titleWrapper}>
         <Text textStyle="subTitle">Event</Text>
-        <Text textStyle="title">Jamstack Conf</Text>
+        <Text textStyle="title">{title}</Text>
       </View>
       <Divider size={2} />
       <View style={styles.detailsContainer}>
         <View style={styles.ticketInfo}>
           <Text textStyle="subTitle" style={styles.infoText}>
-            Date
-          </Text>
-          <Text textStyle="label">September 29, 2024</Text>
-        </View>
-        <View style={styles.ticketInfo}>
-          <Text textStyle="subTitle" style={styles.infoText}>
             Time
           </Text>
-          <Text textStyle="label">9:00 AM - 5:00 PM</Text>
+          <Text textStyle="label">{time}</Text>
         </View>
         <View style={styles.ticketInfo}>
           <Text textStyle="subTitle" style={styles.infoText}>
             Ticket Set
           </Text>
-          <Text textStyle="label">Regular x2</Text>
+          <Text textStyle="label">{ticketType}</Text>
         </View>
         <View style={styles.ticketInfo}>
           <Text textStyle="subTitle" style={styles.infoText}>
             Venue
           </Text>
-          <Text textStyle="label">Toronto city hall</Text>
+          <Text textStyle="label">{location}</Text>
         </View>
       </View>
       <Divider size={4} />

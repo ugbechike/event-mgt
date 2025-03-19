@@ -33,9 +33,9 @@ function App(): React.JSX.Element {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <QueryClientProvider client={queryClient}>
-            <NavigationWrapper>
-              <RootNav />
-            </NavigationWrapper>
+              <NavigationWrapper>
+                <RootNav />
+              </NavigationWrapper>
           </QueryClientProvider>
         </PersistGate>
       </Provider>

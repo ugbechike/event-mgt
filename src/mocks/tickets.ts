@@ -1,5 +1,6 @@
+import { Ticket } from "../hooks/query/useGetTicket";
 
-export const tickets = [
+export const tickets: Array<Ticket> = [
     {
         title: 'Coachella Music Party',
         location: 'Celebration square',
