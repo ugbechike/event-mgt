@@ -5,15 +5,33 @@ import {useRoute} from '@react-navigation/native';
 import {TicketScreenNavigationProps} from '../navigation/type';
 import {Text, TicketDetailsCard} from '../components';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useGetTicket} from '../hooks/query/useGetTickets';
 
 export const TicketDetailsScreen = () => {
   const route = useRoute<TicketScreenNavigationProps['route']>();
   const {id} = route.params as unknown as {id: string};
+  const {data: ticket, error, isLoading} = useGetTicket(id);
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (!ticket || error) {
+    return (
+      <View style={styles.container}>
+        <Text>Error fetching ticket</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <TicketDetailsCard />
+        <TicketDetailsCard {...ticket} />
       </ScrollView>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.downloadDtn}>
@@ -30,10 +48,7 @@ export const TicketDetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: theme.colors.background,
-    // padding: 24,
     paddingHorizontal: 20,
   },
   footer: {
