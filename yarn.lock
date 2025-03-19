@@ -3853,6 +3853,7 @@ __metadata:
     react: 18.3.1
     react-hook-form: ^7.53.0
     react-native: 0.75.2
+    react-native-barcoder: ^0.2.4
     react-native-gesture-handler: ^2.19.0
     react-native-qrcode-svg: ^6.3.2
     react-native-reanimated: ^3.15.1
@@ -9178,6 +9179,16 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 9d6d111d8990dc98bc5402c1266a808b0459b5d54830bbea24c12d908b536df7883f268a7868cfaedde3dd9d4e0d574db456f84d2e6df9c4526f99bb4b5344d8
+  languageName: node
+  linkType: hard
+
+"react-native-barcoder@npm:^0.2.4":
+  version: 0.2.4
+  resolution: "react-native-barcoder@npm:0.2.4"
+  peerDependencies:
+    react: ^18.2.0
+    react-native: 0.73.6
+  checksum: 04f08d8a4ce2bdb46d8116904e4b8ecb17c2185f02b822fd16b4685156c958028542ecae7563fa6519e4d477d490e654255bdd144746847bbc834e80435b82d9
   languageName: node
   linkType: hard
 

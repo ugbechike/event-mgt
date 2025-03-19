@@ -5,6 +5,8 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import {theme} from '../theme';
 import {EventData, EventTicket, eventTickets} from '../mocks/events-data';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+import {ExploreScreenNavigationProps} from '../navigation/type';
 
 // TODO: WILL USE TANSTASK QUERY TO GET TICKET DATA
 interface TicketsSelectScreenProps extends EventData {}
@@ -19,6 +21,8 @@ export const TicketsSelectScreen = ({
 }: TicketsSelectScreenProps) => {
   const [quantity, setQuantity] = useState<number>(MIN_QUANTITY);
   const [selectedTicket, setSelectedTicket] = useState<EventTicket>();
+  const navigation =
+    useNavigation<ExploreScreenNavigationProps['navigation']>();
 
   // TODO: WILL USE TANSTASK QUERY TO GET TICKET DATA
   const [ticketData, setTicketData] = useState<Array<EventTicket> | undefined>(
@@ -60,6 +64,10 @@ export const TicketsSelectScreen = ({
       setIsLoading(false);
     }
   }, [id]);
+
+  const handleProceedToCheckout = useCallback(() => {
+    navigation.navigate('CheckoutScreen');
+  }, [navigation]);
 
   useEffect(() => {
     fetchTicketData();
@@ -145,9 +153,9 @@ export const TicketsSelectScreen = ({
       </View>
 
       {/* <View style={styles.footer}> */}
-        <TouchableOpacity style={styles.button}>
-          <Text textStyle="title">Proceed to checkout</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleProceedToCheckout}>
+        <Text textStyle="title">Proceed to checkout</Text>
+      </TouchableOpacity>
       {/* </View> */}
     </View>
   );

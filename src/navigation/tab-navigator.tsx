@@ -8,8 +8,9 @@ import {
 } from './stacks';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {theme} from '../theme';
+import {BottomTabParamList} from './type';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const tabBarIcon = ({
   route,

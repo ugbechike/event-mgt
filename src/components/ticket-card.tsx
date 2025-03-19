@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import {Text} from './text';
 import {Image} from 'react-native';
 import {theme} from '../theme';
+import { useNavigation } from '@react-navigation/native';
+import { TicketScreenNavigationProps } from '../navigation/type';
 
 interface TicketCardProps {
   title: string;
@@ -13,6 +15,7 @@ interface TicketCardProps {
   ticketType: string;
   full?: boolean;
   quantity: number;
+  id: string;
 }
 export const TicketCard = (props: TicketCardProps) => {
   const {
@@ -24,10 +27,17 @@ export const TicketCard = (props: TicketCardProps) => {
     ticketType,
     full = false,
     quantity,
+    id,
   } = props;
+  const navigation = useNavigation<TicketScreenNavigationProps['navigation']>();
+
+  const handleGotoTicketDetails = useCallback((id: string) => {
+    console.log('Go to ticket details', id);
+    navigation.navigate('TicketDetailsScreen',{id});
+  }, [navigation]);
 
   return (
-    <TouchableWithoutFeedback onPress={() => console.log('xxxxxxx', title)}>
+    <TouchableWithoutFeedback onPress={() => handleGotoTicketDetails(id)}>
       <View style={[styles.card, full && styles.fullCard]}>
         <View style={styles.cardInfo}>
           <Image src={image} style={styles.image} />
@@ -51,7 +61,9 @@ export const TicketCard = (props: TicketCardProps) => {
             <Text textStyle="footer">{locationAddress}</Text>
           </View>
           <View style={styles.badge}>
-            <Text textStyle="footer">{ticketType} x{quantity}</Text>
+            <Text textStyle="footer">
+              {ticketType} x{quantity}
+            </Text>
           </View>
         </View>
         <View style={styles.leftCircle} />

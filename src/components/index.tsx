@@ -8,3 +8,4 @@ export {Card} from './card';
 export {EventDetails} from './event-details';
 export {BottomSheetCard} from './bottomSheet-card';
 export {TicketHorizontalCard} from './ticket-horizontal-card';
+export {TicketDetailsCard} from './ticket-details-card';
